@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles.sass';
+import './styles.module.sass';
 
 export const GlobalStyles = () => {
   return <></>
