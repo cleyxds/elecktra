@@ -28,10 +28,38 @@ export const PricingTable = () => {
         </div>
       </div>
       <div className={styles.shared}>
+        <div className={styles.price}>
+          <span>$</span>6
+        </div>
         <h2>Shared</h2>
+        <div className={styles.largeFeature}>
+          <p>Family</p>
+          <h3>100 GB</h3>
+        </div>
+        <div className={styles.continue}>
+          <button>
+            Continue
+            <img src={Arrow} alt=""/>
+          </button>
+        </div>
+        <div className={styles.waves} />
       </div>
       <div className={styles.unlimited}>
+        <div className={styles.lines} />
+        <div className={styles.price}>
+          <span>$</span>9
+        </div>
         <h2>Unlimited</h2>
+        <div className={styles.largeFeature}>
+          <p>Infinite share</p>
+          <h3>1 Year</h3>
+        </div>
+        <div className={styles.continue}>
+          <button>
+            Continue
+            <img src={Arrow} alt=""/>
+          </button>
+        </div>
       </div>
     </div>
   )

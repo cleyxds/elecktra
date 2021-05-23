@@ -1,6 +1,9 @@
 $black: rgba(15, 15, 15)
 $white-gray: rgba(209, 209, 209, .7)
 
+$waves: "../../assets/waves.png"
+$lines: "../../assets/lines.png"
+
 .pricingContainer
   display: flex
   width: 50rem
@@ -51,8 +54,36 @@ $white-gray: rgba(209, 209, 209, .7)
   .shared
     background: var(--pink-gradient)
 
+    transform: scale(1.15)
+    z-index: 10
+    box-shadow: 0 0 1.5rem .625rem rgba($black, .4)
+
+    .continue
+      position: relative
+      top: 2.8125rem
+      z-index: 2
+    
+    .waves
+      position: absolute
+      content: ""
+      border-radius: .9375rem
+      bottom: 0
+      width: 100%
+      height: 11rem
+      background-image: url($waves)
+      background-size: cover
+
   .unlimited
     background: var(--orange-gradient)
+
+    .lines
+      position: absolute
+      content: ""
+      top: 0
+      width: 100%
+      height: 6.25rem
+      background-image: url($lines)
+      background-size: cover
 
   .feature
     width: 80%
@@ -65,6 +96,19 @@ $white-gray: rgba(209, 209, 209, .7)
       span
         color: var(--white)
         font-weight: 700
+    
+  .largeFeature
+    text-align: center
+
+    p
+      margin: 0
+      font-size: 1.25rem
+
+    h3
+      padding: 1.25rem 0
+      font-size: 2.5rem
+      font-weight: 500
+
 
   .progressOffice
     background-color: rgba($black, .7)
@@ -113,7 +157,10 @@ $white-gray: rgba(209, 209, 209, .7)
       justify-content: center
       align-items: center
       box-shadow: 0 .5rem .75rem .1875rem rgba($black, .2)
+      cursor: pointer
+      z-index: 1
 
       img
         height: .75rem
         margin-left: .625rem
+        
