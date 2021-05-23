@@ -14,11 +14,11 @@ export const PricingTable = () => {
         <h2>Individual</h2>
         <div className={styles.feature}>
           <h3>Office <span>20 GB</span> </h3>
-          <div className={styles.progressOffice} />
+          <div className={`${styles.progress} ${styles.office}`} />
         </div>
         <div className={styles.feature}>
           <h3>Home <span>10 GB</span> </h3>
-          <div className={styles.progressHome} />
+          <div className={`${styles.progress} ${styles.home}`} />
         </div>
         <div className={styles.continue}>
           <button>

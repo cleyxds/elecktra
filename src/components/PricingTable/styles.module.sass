@@ -109,8 +109,7 @@ $lines: "../../assets/lines.png"
       font-size: 2.5rem
       font-weight: 500
 
-
-  .progressOffice
+  .progress
     background-color: rgba($black, .7)
     width: 100%
     height: 1.875rem
@@ -118,7 +117,7 @@ $lines: "../../assets/lines.png"
     position: relative
     box-shadow: 0 .5rem 1rem .375rem rgba($black, .2)
 
-    &::after
+    &.office::after
       border-radius: .9375rem
       position: absolute
       content: ""
@@ -126,15 +125,7 @@ $lines: "../../assets/lines.png"
       height: 100%
       width: 80%
 
-  .progressHome
-    background-color: rgba($black, .7)
-    width: 100%
-    height: 1.875rem
-    border-radius: .9375rem
-    position: relative
-    box-shadow: 0 .5rem 1rem .375rem rgba($black, .2)
-
-    &::after
+    &.home::after
       border-radius: .9375rem
       position: absolute
       content: ""
