@@ -1,2 +1,45 @@
+.content
+  div
+    display: flex
+    justify-content: space-around
 
-  
+    section
+      background: var(--orange-gradient)
+      border-radius: .75rem
+
+      .measurements
+        span
+          color: lime
+
+      .metrics
+        width: 25rem
+        display: flex
+        justify-content: space-around
+        padding: 2rem 1.5rem .75rem
+
+
+        div // Each metric
+          align-items: center
+
+          &.smallFeature::after
+            border-right: 1px solid var(--black)
+            position: relative
+            content: ""
+            height: 50%
+            width: 1.4375rem
+
+          img
+            width: 24px
+            height: 24px
+            margin: 0 .5rem
+            
+          div
+            display: flex
+            flex-direction: column
+            font-size: 14px
+            justify-content: center
+
+            .feature
+              font-size: small
+              font-family: Ubuntu
+              color: var(--white-grey)
