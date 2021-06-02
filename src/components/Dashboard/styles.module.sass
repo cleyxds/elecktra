@@ -1,15 +1,60 @@
-.content
+.measurementsContainer
+  h1
+    font-size: xx-large
+
   div
     display: flex
     justify-content: space-around
 
-    section
-      background: var(--orange-gradient)
+    .performance
       border-radius: .75rem
+      display: flex
+      flex-direction: column
+      align-items: center
+
+      h2
+        align-self: start
 
       .measurements
-        span
-          color: lime
+        justify-content: space-around
+        align-items: center
+        padding: .75rem 1.5rem
+
+        background: var(--blue-gradient)
+        border-radius: 1rem
+
+        p
+          margin: 0
+          color: var(--white-grey)
+          font-size: .875rem
+
+        strong
+          margin-block-start: 1rem
+          margin-block-end: .5rem
+          font-size: 36px
+
+        .graphics
+          background: var(--measurement-gradient)
+          height: 12rem
+          width: 12rem
+          margin-right: 2rem
+          border-radius: 50%
+          transition: transform 2s
+        
+        .statistics
+          flex-direction: column
+
+        .selector
+          padding: .5rem
+          border: transparent
+          border-radius: .9375rem
+          font-size: medium
+          font-family: Ubuntu, sans-serif
+          
+          background: var(--white-grey)
+
+          position: relative
+          top: -5rem
 
       .metrics
         width: 25rem
@@ -42,4 +87,7 @@
             .feature
               font-size: small
               font-family: Ubuntu
-              color: var(--white-grey)
+              color: var(--black-2)
+
+    .average
+      // background: var(--blue-gradient)

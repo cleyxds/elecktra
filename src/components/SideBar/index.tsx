@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Logo from '../../assets/arrow.png';
+import BatteryIcon from '../../assets/Dashboard/battery.svg'
 
 import styles from './styles.module.sass';
 
@@ -11,19 +12,20 @@ export const SideBar = () => {
 
       <nav className={styles.featureContainer}>
         <div className={styles.feature}>
-          <span>Dashboard</span>
+          <h2>Dashboard</h2>
         </div>
         <div className={styles.feature}>
-          <span>Analitycs</span>
+          <h2>Analitycs</h2>
         </div>
         <div className={styles.feature}>
-          <span>Lightning</span>
+          <h2>Lightning</h2>
         </div>
         <div className={styles.feature}>
-          <span>Batteries</span>
+          <img src={BatteryIcon} alt="Batteries Icon" />
+          <h2>Batteries</h2>
         </div>
         <div className={styles.feature}>
-          <span>Settings</span>
+          <h2>Settings</h2>
         </div>
       </nav>
     </aside>
