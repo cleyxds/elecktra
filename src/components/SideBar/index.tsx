@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Logo from '../../assets/arrow.png';
+import Logo from '../../assets/main-logo.svg';
 import BatteryIcon from '../../assets/Dashboard/battery.svg'
 
 import styles from './styles.module.sass';
