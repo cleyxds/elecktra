@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
 import BatteriesIcon from '../../assets/Dashboard/battery.svg';
 import EnergyIcon from '../../assets/Dashboard/energy.svg';
 import GlobeIcon from '../../assets/Dashboard/globe.svg';
-import { api } from '../../services/api';
 
 import styles from './styles.module.sass';
+
+let socket:Socket;
+
+const SOCKET_IO_CONNECTION = 'http://localhost:33334'
 
 export const Dashboard = () => {
   const [measurement, setMeasurement] = useState(0);
 
   useEffect(() => {
-    RetrieveData();
-    
-    setInterval(RetrieveData, 2000)
+    socket = io(SOCKET_IO_CONNECTION);
   }, []);
 
-  function RetrieveData() {
-    api.get('/data')
-      .then((response) => {
-        setMeasurement(response.data[0].measurement);
-      });
-  }
+  useEffect(() => {
+    socket.on('measurement', message => {
+      const { measurement, timestamp } = message;
+      
+      setMeasurement(measurement);
+    });
+  }, []);
 
   return (
     <section className={styles.measurementsContainer}>
@@ -48,7 +51,7 @@ export const Dashboard = () => {
               <img src={BatteriesIcon} />
               <div>
                 <span className={styles.feature}>Capacidade</span>
-                <span><strong>45 Ah</strong></span>
+                <span><strong>45</strong> <small> Ah</small></span>
               </div>
             </div>
             <div className={styles.smallFeature}>

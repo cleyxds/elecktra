@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.sass';
 
-import Arrow from '../../assets/arrow.png';
+import Arrow from '../../assets/Dashboard/arrow.png';
 
 export const PricingTable = () => {
   return (
