@@ -9,7 +9,13 @@ import styles from './styles.module.sass';
 
 let socket:Socket;
 
-const SOCKET_IO_CONNECTION = 'http://localhost:33334'
+const SOCKET_IO_CONNECTION:string = 'http://localhost:33334'
+
+interface Measurement {
+  customer_id: number;
+  measurement: number | 0;
+  timestamp: string;
+}
 
 export const Dashboard = () => {
   const [measurement, setMeasurement] = useState(0);
@@ -20,7 +26,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     socket.on('measurement', message => {
-      const { measurement, timestamp } = message;
+      const { measurement, timestamp, customer_id } = message;
       
       setMeasurement(measurement);
     });
@@ -43,7 +49,6 @@ export const Dashboard = () => {
             </div>
             <select autoFocus name="options" defaultValue="Instant" className={styles.selector}>
               <option value="Instant">Instanâneo</option>
-              <option value="Daily">Diário</option>
             </select>
           </div>
           <div className={styles.metrics}>
