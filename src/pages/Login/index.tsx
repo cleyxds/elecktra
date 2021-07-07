@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Header } from '../../components/Header';
 
 import { customers } from '../../services/api';
 
-import styles from './styles.module.sass';
+import styles from './login.module.sass';
 
 export const Login = () => {
 
@@ -27,7 +26,7 @@ export const Login = () => {
             <input type="text" placeholder="Nome de usuário" />
             <input type="password" placeholder="Senha" />
 
-            <button type="submit" onClick={handleFormLogin}>Login</button>
+            <button type="submit" onClick={handleFormLogin}>Entrar</button>
           </form>
         </section>
 
