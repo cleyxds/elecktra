@@ -9,11 +9,11 @@ import styles from './styles.module.sass';
 
 let socket:Socket;
 
-const SOCKET_IO_CONNECTION:string = 'http://localhost:33334'
+const SOCKET_IO_CONNECTION:string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
 interface Measurement {
   customer_id: number;
-  measurement: number | 0;
+  measurement: number;
   timestamp: string;
 }
 

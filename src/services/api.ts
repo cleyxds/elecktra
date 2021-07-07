@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export const api = axios.create({
-  baseURL: 'http://localhost:80'
-})
+export const customers = axios.create({
+  baseURL: process.env.REACT_APP_CUSTOMERS_SERVER
+});
