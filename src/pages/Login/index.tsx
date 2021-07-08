@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -9,17 +9,16 @@ import { customers } from '../../services/api';
 
 import styles from './login.module.sass';
 
-interface InputForm {
+interface LoginForm {
   username: string;
   password: string;
 }
 
 export const Login = () => {
   const history = useHistory();
-  const { register, handleSubmit } = useForm<InputForm>();
+  const { register, handleSubmit } = useForm<LoginForm>();
 
-  const tryLogin = async (data: InputForm) => {
-    console.log('Fazendo o POST para pegar o JWT');
+  const handleLogin = async (data: LoginForm) => {
     await customers.post('/authenticate', data)
       .then(response => {
         if (response.status === 200) {
@@ -38,7 +37,7 @@ export const Login = () => {
         <h1>Bem vindo(a) de volta!</h1>
 
         <section className={styles.formContainer}>
-          <form onSubmit={handleSubmit(tryLogin)}>
+          <form onSubmit={handleSubmit(handleLogin)}>
             <input
               {...register("username")}
               type="text"
