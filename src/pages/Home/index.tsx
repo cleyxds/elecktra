@@ -1,20 +1,18 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import { Header } from '../../components/Header';
 
 import styles from './home.module.sass';
 
 export const Home = () => {
 
   return (
-    <div>
-      <div>Homepage</div>
-      <Link to="/login">
-        <button>Vá para o LOGIN</button>
-      </Link>
-      <Link to="/signup">
-        <button>Vá se registar</button>
-      </Link>
-    </div>
+    <>
+      <Header isHome />
+      <div className={styles.homeContainer}>
+        <h1>Homepage</h1>
+      </div>
+    </>
   )
 }
