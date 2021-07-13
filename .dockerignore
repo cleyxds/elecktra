@@ -1,1 +1,10 @@
 /node_modules
+
+tsconfig.json
+README.md
+LICENSE.md
+
+.gitignore
+.dockerignore
+.env.local
+.env
