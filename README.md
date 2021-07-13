@@ -7,10 +7,8 @@ A front-end application for monitoring power consumption
 ![Apache License](https://img.shields.io/github/license/cleyxds/elecktra)
 ![Last Commit](https://img.shields.io/github/last-commit/cleyxds/elecktra)
 
-  
-## Demo
 
-https://media.giphy.com/media/RROaqO5Pard4j906OX/giphy.gif
+![Elecktra](https://media.giphy.com/media/RROaqO5Pard4j906OX/giphy.gif)
 
   
 ## Features
