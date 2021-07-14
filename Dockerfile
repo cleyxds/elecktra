@@ -14,11 +14,14 @@ RUN yarn build
 
 # Stage 1 - Serve frontend assets
 
-FROM fholzer/nginx-brotli:v1.12.2
+FROM nginx:stable
 
 WORKDIR /etc/nginx
+
 ADD nginx.conf /etc/nginx/nginx.conf
 
-COPY --from=build /home/application/build /usr/share/nginx/html
+COPY --from=build /home/application/build /home/nginx/html
+
 EXPOSE 443
+
 CMD ["nginx", "-g", "daemon off;"]
