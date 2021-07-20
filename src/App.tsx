@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import { GlobalStyles } from './styles/GlobalStyles';
-import { Router } from './routes';
+import { GlobalStyles } from './styles/GlobalStyles'
+import { Router } from './routes'
 
 function App() {
   return (
@@ -12,4 +12,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

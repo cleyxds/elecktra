@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
-import UserIcon from '../../assets/Dashboard/user.svg';
+import UserIcon from '../../assets/Dashboard/user.svg'
 
-import { customers } from '../../services/api';
+import { customers } from '../../services/api'
 
-import styles from './profile.module.sass';
+import styles from './profile.module.sass'
 
 interface Customer {
   id: number

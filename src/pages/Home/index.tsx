@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import { Link } from 'react-router-dom';
-import { Header } from '../../components/Header';
+import { Link } from 'react-router-dom'
+import { Header } from '../../components/Header'
 
-import styles from './home.module.sass';
+import styles from './home.module.sass'
 
 export const Home = () => {
 

@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+import React, { useEffect, useState } from 'react'
+import { io, Socket } from 'socket.io-client'
 
-import BatteriesIcon from '../../assets/Dashboard/battery.svg';
-import EnergyIcon from '../../assets/Dashboard/energy.svg';
-import GlobeIcon from '../../assets/Dashboard/globe.svg';
-import { Profile } from '../../components/Profile';
-import { SideBar } from '../../components/SideBar';
+import BatteriesIcon from '../../assets/Dashboard/battery.svg'
+import EnergyIcon from '../../assets/Dashboard/energy.svg'
+import GlobeIcon from '../../assets/Dashboard/globe.svg'
+import { Profile } from '../../components/Profile'
+import { SideBar } from '../../components/SideBar'
 
-import styles from './dashboard.module.sass';
+import styles from './dashboard.module.sass'
 
-let socket: Socket;
+let socket: Socket
 
 const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
 interface Measurement {
-  customer_id: number;
-  measurement: number;
-  timestamp: string;
+  customer_id: number
+  measurement: number
+  timestamp: string
 }
 
 export const Dashboard = () => {
-  const [measurement, setMeasurement] = useState(0);
+  const [measurement, setMeasurement] = useState(0)
 
   useEffect(() => {
-    socket = io(SOCKET_IO_CONNECTION);
-  }, []);
+    socket = io(SOCKET_IO_CONNECTION)
+  }, [])
 
   useEffect(() => {
     socket.on('measurement', message => {
-      const { measurement, timestamp, customer_id } = message;
+      const { measurement, timestamp, customer_id } = message
 
-      setMeasurement(measurement);
-    });
-  }, []);
+      setMeasurement(measurement)
+    })
+  }, [])
 
   return (
     <div className={styles.dashboardContainer}>
@@ -54,8 +54,8 @@ export const Dashboard = () => {
 
                   <p>Aumento de +12%</p>
                 </div>
-                <select autoFocus name="options" defaultValue="Instant" className={styles.selector}>
-                  <option value="Instant">Instanâneo</option>
+                <select autoFocus name='options' defaultValue='Instant' className={styles.selector}>
+                  <option value='Instant'>Instanâneo</option>
                 </select>
               </div>
               <div className={styles.metrics}>

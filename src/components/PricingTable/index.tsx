@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './styles.module.sass';
+import styles from './styles.module.sass'
 
-import Arrow from '../../assets/Dashboard/arrow.png';
+import Arrow from '../../assets/Dashboard/arrow.png'
 
 export const PricingTable = () => {
   return (
@@ -23,7 +23,7 @@ export const PricingTable = () => {
         <div className={styles.continue}>
           <button>
             Continue
-            <img src={Arrow} alt=""/>
+            <img src={Arrow} />
           </button>
         </div>
       </div>
@@ -39,7 +39,7 @@ export const PricingTable = () => {
         <div className={styles.continue}>
           <button>
             Continue
-            <img src={Arrow} alt=""/>
+            <img src={Arrow} />
           </button>
         </div>
         <div className={styles.waves} />
@@ -57,7 +57,7 @@ export const PricingTable = () => {
         <div className={styles.continue}>
           <button>
             Continue
-            <img src={Arrow} alt=""/>
+            <img src={Arrow} />
           </button>
         </div>
       </div>
