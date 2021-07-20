@@ -10,7 +10,7 @@ import { customers } from '../../services/api';
 import styles from './login.module.sass';
 
 interface LoginForm {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -39,10 +39,10 @@ export const Login = () => {
         <section className={styles.formContainer}>
           <form onSubmit={handleSubmit(handleLogin)}>
             <input
-              {...register("username")}
-              type="text"
-              placeholder="Nome de usuário"
-              name="username"
+              {...register("email")}
+              type="email"
+              placeholder="Email"
+              name="email"
             />
             <input
               {...register("password")}
