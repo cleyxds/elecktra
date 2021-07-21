@@ -4,6 +4,7 @@ import { Home } from './pages/Home'
 import { Login } from './pages/Login'
 import { Signup } from './pages/Signup'
 import { Dashboard } from './pages/Dashboard'
+import { PrivateRoute } from './components/PrivateRoute'
 
 export const Router = () => {
   return (
@@ -12,7 +13,7 @@ export const Router = () => {
         <Route path='/' exact component={Home}/>
         <Route path='/login' exact component={Login}/>
         <Route path='/signup' exact component={Signup}/>
-        <Route path='/dashboard' exact component={Dashboard}/>
+        <PrivateRoute path='/dashboard' exact Component={Dashboard}/>
       </Switch>
     </BrowserRouter>
   )

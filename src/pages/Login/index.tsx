@@ -1,33 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { AuthContext } from '../../contexts/AuthContext'
 
 import { Link, useHistory } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
 
 import { Header } from '../../components/Header'
-import { customers } from '../../services/api'
+
+import { LoginForm } from '../../types/loginForm'
 
 import styles from './login.module.sass'
 
-interface LoginForm {
-  email: string
-  password: string
-}
-
 export const Login = () => {
-  const history = useHistory()
   const { register, handleSubmit } = useForm<LoginForm>()
 
-  const handleLogin = async (data: LoginForm) => {
-    await customers.post('/authenticate', data)
-      .then(response => {
-        if (response.status === 200) {
-          history.push('dashboard')
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  const { handleLogin } = useContext(AuthContext)
+  
+  const history = useHistory()
+
+  const confirmLogin = async (loginForm: LoginForm) => {
+    await handleLogin(loginForm)
+    setTimeout(() => {
+      history.push('dashboard')
+    }, 500)
+    
   }
 
   return (
@@ -37,7 +34,7 @@ export const Login = () => {
         <h1>Bem vindo(a) de volta!</h1>
 
         <section className={styles.formContainer}>
-          <form onSubmit={handleSubmit(handleLogin)}>
+          <form onSubmit={handleSubmit(confirmLogin)}>
             <input
               {...register('email')}
               type='email'

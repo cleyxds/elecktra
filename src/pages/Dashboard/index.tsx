@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { io, Socket } from 'socket.io-client'
 
 import BatteriesIcon from '../../assets/Dashboard/battery.svg'
@@ -6,6 +6,8 @@ import EnergyIcon from '../../assets/Dashboard/energy.svg'
 import GlobeIcon from '../../assets/Dashboard/globe.svg'
 import { Profile } from '../../components/Profile'
 import { SideBar } from '../../components/SideBar'
+
+import { DashboardContext } from '../../contexts/DashboardContext'
 
 import styles from './dashboard.module.sass'
 

@@ -1,35 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { AuthContext } from '../../contexts/AuthContext'
 
 import { Link, useHistory } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
 
 import { Header } from '../../components/Header'
-import { customers } from '../../services/api'
+
+import { RegisterForm } from '../../types/registerForm'
 
 import styles from './signup.module.sass'
 
-interface RegisterForm {
-  name: string
-  username: string
-  email: string
-  password: string
-}
-
 export const Signup = () => {
-  const history = useHistory()
   const { register, handleSubmit } = useForm<RegisterForm>()
 
-  const handleRegister = async (data: RegisterForm) => {
-    await customers.post('/customers', data)
-      .then(response => {
-        if (response.status === 201) {
-          history.push('dashboard')
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  const { handleRegister } = useContext(AuthContext)
+
+  const history = useHistory()
+
+  const confirmRegister = async (register: RegisterForm) => {
+    await handleRegister(register)
+    setTimeout(() => {
+      history.push('dashboard')
+    }, 500)
   }
 
   return (
@@ -39,7 +33,7 @@ export const Signup = () => {
         <h1>Bem vindo(a)!</h1>
 
         <section className={styles.formContainer}>
-          <form onSubmit={handleSubmit(handleRegister)}>
+          <form onSubmit={handleSubmit(confirmRegister)}>
             <input
               {...register('name')}
               type='text'
