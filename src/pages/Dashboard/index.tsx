@@ -6,6 +6,7 @@ import EnergyIcon from '../../assets/Dashboard/energy.svg'
 import GlobeIcon from '../../assets/Dashboard/globe.svg'
 import { Profile } from '../../components/Profile'
 import { SideBar } from '../../components/SideBar'
+import { AuthContext } from '../../contexts/AuthContext'
 
 import { DashboardContext } from '../../contexts/DashboardContext'
 
@@ -16,23 +17,29 @@ let socket: Socket
 const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
 interface Measurement {
-  customer_id: number
+  customer: number
   measurement: number
   timestamp: string
 }
 
 export const Dashboard = () => {
-  const [measurement, setMeasurement] = useState(0)
+  const [measurement, setMeasurement] = useState({ measurement: 0 } as Measurement)
+  
+  const { customer } = useContext(AuthContext)
 
   useEffect(() => {
     socket = io(SOCKET_IO_CONNECTION)
+    socket.emit('customer', customer)
   }, [])
 
   useEffect(() => {
     socket.on('measurement', message => {
-      const { measurement, timestamp, customer_id } = message
+      const measurementMessage = message as Measurement
 
-      setMeasurement(measurement)
+      if (measurementMessage.customer === customer.id) {
+        setMeasurement(measurementMessage)
+      }
+      
     })
   }, [])
 
@@ -48,11 +55,11 @@ export const Dashboard = () => {
             <section className={styles.performance}>
               <h2>Performance</h2>
               <div className={styles.measurements}>
-                <div className={styles.graphics} style={{ transform: `scale(${(measurement / 5500) * 2})` }} />
+                <div className={styles.graphics} style={{ transform: `scale(${(measurement.measurement / 5500) * 2})` }} />
                 <div className={styles.statistics}>
                   <h4>Consumo instanâneo</h4>
 
-                  <strong>{measurement} <sup>W</sup></strong>
+                  <strong>{measurement.measurement} <sup>W</sup></strong>
 
                   <p>Aumento de +12%</p>
                 </div>
