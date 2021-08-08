@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const handleLogin = async (login: LoginForm) => {
-    const { data: { jwt, customer } } = await customers.post('/authenticate', login)
+    const { data: { jwt, customer } } = await customers.post('/customers/token', login)
     setCustomer(customer)
     handleAuth(jwt)
   }
