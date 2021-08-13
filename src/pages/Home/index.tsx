@@ -12,7 +12,7 @@ export const Home = () => {
   useEffect(() => {
     const JWT = localStorage.getItem('token')
     JWT && prepareJWT(JWT)
-  })
+  }, [])
 
   return (
     <>

@@ -31,14 +31,15 @@ export const Dashboard = () => {
   useEffect(() => {
     socket = socketSetup()
     socket.emit('customer', customer)
-  })
+  }, [])
 
   useEffect(() => {
     socket.on('measurement', message => {
       const measurementMessage = message as Measurement
+      
       measurementMessage.customer === customer.id && setMeasurement(measurementMessage)
     })
-  })
+  }, [])
 
   return (
     <div className={styles.dashboardContainer}>
