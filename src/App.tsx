@@ -2,18 +2,18 @@ import React from 'react'
 
 import { GlobalStyles } from './styles/GlobalStyles'
 import { Router } from './routes'
-import { DashboardContext } from './contexts/DashboardContext'
-import { AuthProvider } from './contexts/AuthContext'
+import { DashboardContextProvider } from './contexts/DashboardContext'
+import { AuthContextProvider } from './contexts/AuthContext'
 
 function App() {
   return (
     <>
-      <AuthProvider>
-        <GlobalStyles />
-        <DashboardContext.Provider value={0}>
+      <GlobalStyles />
+      <AuthContextProvider>
+        <DashboardContextProvider>
           <Router />
-        </DashboardContext.Provider>
-      </AuthProvider>
+        </DashboardContextProvider>
+      </AuthContextProvider>
     </>
   )
 }

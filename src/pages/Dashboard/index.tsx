@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { io, Socket } from 'socket.io-client'
+
+import { Socket } from 'socket.io-client'
+
+import { Profile } from '../../components/Profile'
+import { SideBar } from '../../components/SideBar'
+
+import { AuthContext } from '../../contexts/AuthContext'
+import { DashboardContext } from '../../contexts/DashboardContext'
 
 import BatteriesIcon from '../../assets/Dashboard/battery.svg'
 import EnergyIcon from '../../assets/Dashboard/energy.svg'
 import GlobeIcon from '../../assets/Dashboard/globe.svg'
-import { Profile } from '../../components/Profile'
-import { SideBar } from '../../components/SideBar'
-import { AuthContext } from '../../contexts/AuthContext'
-
-import { DashboardContext } from '../../contexts/DashboardContext'
 
 import styles from './dashboard.module.sass'
-
-let socket: Socket
-
-const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
 interface Measurement {
   customer: number
@@ -22,26 +20,25 @@ interface Measurement {
   timestamp: string
 }
 
+let socket: Socket
+
 export const Dashboard = () => {
   const [measurement, setMeasurement] = useState({ measurement: 0 } as Measurement)
   
   const { customer } = useContext(AuthContext)
+  const { socketSetup } = useContext(DashboardContext)
 
   useEffect(() => {
-    socket = io(SOCKET_IO_CONNECTION)
+    socket = socketSetup()
     socket.emit('customer', customer)
-  }, [])
+  })
 
   useEffect(() => {
     socket.on('measurement', message => {
       const measurementMessage = message as Measurement
-
-      if (measurementMessage.customer === customer.id) {
-        setMeasurement(measurementMessage)
-      }
-      
+      measurementMessage.customer === customer.id && setMeasurement(measurementMessage)
     })
-  }, [])
+  })
 
   return (
     <div className={styles.dashboardContainer}>
@@ -69,21 +66,21 @@ export const Dashboard = () => {
               </div>
               <div className={styles.metrics}>
                 <div className={styles.smallFeature}>
-                  <img src={BatteriesIcon} />
+                  <img src={BatteriesIcon} alt='Batteries Icon' />
                   <div>
                     <span className={styles.feature}>Capacidade</span>
                     <span><strong>45</strong> <small> Ah</small></span>
                   </div>
                 </div>
                 <div className={styles.smallFeature}>
-                  <img src={EnergyIcon} />
+                  <img src={EnergyIcon} alt='Energy Icon' />
                   <div>
                     <span className={styles.feature}>Rendimento total</span>
                     <span><strong>0.13</strong> <small> kWh</small></span>
                   </div>
                 </div>
                 <div>
-                  <img src={GlobeIcon} />
+                  <img src={GlobeIcon} alt='Globe Icon' />
                   <div>
                     <span className={styles.feature}>Redução de CO2</span>
                     <span><strong>0.1</strong> <small> ton</small></span>

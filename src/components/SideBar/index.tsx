@@ -1,19 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
 
 import Logo from '../../assets/logo.svg'
 import DashboardIcon from '../../assets/Sidebar/dashboard.svg'
 import BatteryIcon from '../../assets/Sidebar/battery.svg'
 import SettingsIcon from '../../assets/Sidebar/settings.svg'
 
+import { DashboardContext } from '../../contexts/DashboardContext'
+
 import styles from './sidebar.module.sass'
 
 export const SideBar = () => {
+  const { toggleSettingsModal } = useContext(DashboardContext);
+
   return (
     <aside>
-      <Link to='/'>
-        <img src={Logo} alt='Logo' />
-      </Link>
+      <img src={Logo} alt='Logo' />
 
       <nav className={styles.featureContainer}>
         <div className={styles.feature}>
@@ -24,7 +25,7 @@ export const SideBar = () => {
           <img src={BatteryIcon} alt='Battery Icon' />
           <h2>Batteries</h2>
         </div>
-        <div className={styles.feature}>
+        <div className={styles.feature} onClick={toggleSettingsModal}>
           <img src={SettingsIcon} alt='Settings Icon' />
           <h2>Settings</h2>
         </div>
