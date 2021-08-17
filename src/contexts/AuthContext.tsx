@@ -15,7 +15,7 @@ interface AuthContextData {
   isAuthenticated: boolean
   decodedToken: Object
   isExpired: boolean
-  validateAuth: () => boolean
+  validateAuth: () => Promise<boolean>
   prepareJWT: (JWT: string) => void
   handleLogin: (login: LoginForm) => Promise<void>
   handleLogout: () => void
@@ -39,7 +39,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const { data } = await customers.post('/customers/token', login)
     setCustomer(data.customer)
     setJWT(data.jwt)
-    handleAuth(data.jwt)
+    await handleAuth(data.jwt)
   }
 
   const handleLogout = () => {
@@ -57,19 +57,19 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     })
   }
 
-  const handleAuth = (jwt: string) => {
+  const handleAuth = async (jwt: string) => {
     if (!JWT || isExpired) {
       localStorage.setItem('token', jwt)
       setIsAuthenticated(true)
     }
     
-    validateAuth()
+    await validateAuth()
   }
   
-  const validateAuth = () => {
+  const validateAuth = async () => {
     if (JWT) {
       if (!isExpired) {
-        revalidateCustomer(JWT)
+        await revalidateCustomer(JWT)
         setTimeout(() => {}, 2000)
         return true
       } else {

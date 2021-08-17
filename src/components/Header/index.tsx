@@ -13,8 +13,8 @@ export const Header = ({ isHome }: any) => {
 
   const history = useHistory()
 
-  const handleLogin = () => {
-    validateAuth() && setTimeout(() => history.push('dashboard'), 500)
+  const handleLogin = async () => {
+    await validateAuth() && setTimeout(() => history.push('dashboard'), 500)
   }
 
   return (
