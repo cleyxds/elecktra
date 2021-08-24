@@ -70,21 +70,21 @@ export const Dashboard = () => {
                   <img src={BatteriesIcon} alt='Batteries Icon' />
                   <div>
                     <span className={styles.feature}>Capacidade</span>
-                    <span><strong>45</strong> <small> Ah</small></span>
+                    <span><strong>220</strong> <small> V</small></span>
                   </div>
                 </div>
                 <div className={styles.smallFeature}>
                   <img src={EnergyIcon} alt='Energy Icon' />
                   <div>
                     <span className={styles.feature}>Rendimento total</span>
-                    <span><strong>0.13</strong> <small> kWh</small></span>
+                    <span><strong>0</strong> <small> kWh</small></span>
                   </div>
                 </div>
                 <div>
                   <img src={GlobeIcon} alt='Globe Icon' />
                   <div>
                     <span className={styles.feature}>Redução de CO2</span>
-                    <span><strong>0.1</strong> <small> ton</small></span>
+                    <span><strong>0</strong> <small> kg</small></span>
                   </div>
                 </div>
               </div>

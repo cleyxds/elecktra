@@ -6,20 +6,19 @@ import { useJwt } from 'react-jwt'
 
 import { customers } from '../services/api'
 
-import { Customer } from '../types/customer'
-import { LoginForm } from '../types/loginForm'
-import { RegisterForm } from '../types/registerForm'
+import { ICustomer, ILoginForm, IRegisterForm } from '../types/context'
 
 interface AuthContextData {
-  customer: Customer
+  customer: ICustomer
   isAuthenticated: boolean
   decodedToken: Object
   isExpired: boolean
   validateAuth: () => Promise<boolean>
   prepareJWT: (JWT: string) => void
-  handleLogin: (login: LoginForm) => Promise<void>
+  handleLogin: (login: ILoginForm) => Promise<void>
   handleLogout: () => void
-  handleRegister: (register: RegisterForm) => Promise<void>
+  handleRegister: (register: IRegisterForm) => Promise<void>
+  updateAvatarUrl: (avatar_url: string) => void
 }
 
 interface AuthContextProviderProps {
@@ -29,13 +28,24 @@ interface AuthContextProviderProps {
 export const AuthContext = createContext({} as AuthContextData)
 
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [customer, setCustomer] = useState({} as Customer)
+  const [customer, setCustomer] = useState({} as ICustomer)
   const [JWT, setJWT] = useState('')
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const { decodedToken, isExpired } = useJwt(JWT)
 
-  const handleLogin = async (login: LoginForm) => {
+  const updateAvatarUrl = (avatar_url: string) => {
+    setCustomer({
+      id: customer.id,
+      created_at: customer.created_at,
+      devices: customer.devices,
+      login: customer.login,
+      name: customer.name,
+      avatar_url
+    })
+  }
+
+  const handleLogin = async (login: ILoginForm) => {
     const { data } = await customers.post('/customers/token', login)
     setCustomer(data.customer)
     setJWT(data.jwt)
@@ -45,11 +55,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const handleLogout = () => {
     localStorage.removeItem('token')
     setJWT('')
-    setCustomer({} as Customer)
+    setCustomer({} as ICustomer)
     setIsAuthenticated(false)
   }
   
-  const handleRegister = async (register: RegisterForm) => {
+  const handleRegister = async (register: IRegisterForm) => {
     await customers.post('/customers', register)
     await handleLogin({ 
       email: register.email, 
@@ -104,7 +114,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         validateAuth,
         handleLogin,
         handleLogout,
-        handleRegister
+        handleRegister,
+        updateAvatarUrl
       }}
     >
       {children}

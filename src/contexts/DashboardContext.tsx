@@ -6,6 +6,9 @@ import { SettingsModal } from '../components/SettingsModal'
 
 interface DashboardContextData {
   toggleSettingsModal: () => void
+  toggleUploadModal: () => void
+  isUploadModalOpen: boolean
+  closeModals: () => void
   socketSetup: () => Socket
   closeSocket: () => void
 }
@@ -22,6 +25,16 @@ export const DashboardContext = createContext({} as DashboardContextData)
 
 export const DashboardContextProvider = ({ children }: DashboardContextProviderProps) => {
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false)
+
+  const closeModals = () => {
+    setIsSettingsModalOpen(false)
+    setIsUploadModalOpen(false)
+  }
+
+  const toggleUploadModal = () => {
+    setIsUploadModalOpen(!isUploadModalOpen)
+  }
 
   const toggleSettingsModal = () => {
     setIsSettingsModalOpen(!isSettingsModalOpen)
@@ -39,6 +52,9 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
     <DashboardContext.Provider
       value={{
         toggleSettingsModal,
+        toggleUploadModal,
+        isUploadModalOpen,
+        closeModals,
         socketSetup,
         closeSocket
       }}

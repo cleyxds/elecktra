@@ -8,18 +8,18 @@ import { useForm } from 'react-hook-form'
 
 import { Header } from '../../components/Header'
 
-import { RegisterForm } from '../../types/registerForm'
+import { IRegisterForm } from '../../types/context'
 
 import styles from './signup.module.sass'
 
 export const Signup = () => {
-  const { register, handleSubmit } = useForm<RegisterForm>()
+  const { register, handleSubmit } = useForm<IRegisterForm>()
 
   const { handleRegister } = useContext(AuthContext)
 
   const history = useHistory()
 
-  const confirmRegister = async (register: RegisterForm) => {
+  const confirmRegister = async (register: IRegisterForm) => {
     await handleRegister(register)
     setTimeout(() => {
       history.push('dashboard')
