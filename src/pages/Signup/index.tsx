@@ -63,9 +63,7 @@ export const Signup = () => {
           </form>
         </section>
 
-        <div className={styles.alternative}>
-          <span>Já tem uma conta? <Link to='/login'>Entre agora</Link></span>
-        </div>
+        <span className={styles.alternative}>Já tem uma conta? <Link to='/login'>Entre agora</Link></span>
       </div>
     </>
   )

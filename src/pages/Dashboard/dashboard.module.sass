@@ -9,50 +9,55 @@
   width: 100%
   padding: 1.5625rem
 
-  header
-    margin-bottom: 4rem
-
 .measurementsContainer
   h1
+    font-family: Poppins
     font-size: 2rem
+    margin-bottom: 3rem
 
   div
     display: flex
     justify-content: space-around
 
     .performance
-      border-radius: .75rem
       display: flex
       flex-direction: column
       align-items: center
+      border-radius: .75rem
 
       h2
+        margin-bottom: 1rem
+        font-family: Poppins
         align-self: start
 
       .measurements
+        padding: .75rem 1.5rem
         justify-content: space-around
         align-items: center
-        padding: .75rem 1.5rem
-
         background: var(--blue-gradient)
         border-radius: 1rem
 
-        p
-          margin: 0
-          color: var(--white-grey)
-          font-size: .875rem
+        h4
+          font-family: Poppins
 
         strong
           margin-block-start: 1rem
-          margin-block-end: .5rem
-          font-size: 36px
+          margin-block-end: 1.3rem
+          font-family: Roboto Mono
+          font-weight: 700
+          font-size: 2.25rem
+
+        p
+          font-weight: 700
+          font-size: 1rem
+          color: var(--red-1)
 
         .graphics
-          background: var(--graphic-gradient)
           height: 12rem
           width: 12rem
           margin-right: 2rem
           border-radius: 50%
+          background: var(--graphic-gradient)
           transition: transform 2s
         
         .statistics
@@ -60,23 +65,22 @@
 
         .selector
           padding: .5rem
+          font-family: Poppins
+          font-size: 1rem
           border: transparent
           border-radius: .9375rem
-          font-size: 1rem
-          font-family: Ubuntu, sans-serif
-          
           background: var(--white-grey)
-
           position: relative
           top: -5rem
+          right: -.8rem
 
       .metrics
         display: flex
         justify-content: space-around
         padding: 2rem 1.5rem .75rem
 
-
         div // Each metric
+          font-family: Poppins
           align-items: center
 
           &.smallFeature::after
@@ -87,8 +91,8 @@
             width: 1.4375rem
 
           img
-            width: 24px
-            height: 24px
+            width: 1.5rem
+            height: 1.5rem
             margin: 0 .5rem
             
           div
@@ -97,9 +101,18 @@
             font-size: .875rem
             justify-content: center
 
+            span
+              font-family: inherit
+
+              strong
+                font-family: inherit
+
+              small
+                font-family: inherit
+
             .feature
+              font-family: inherit
               font-size: .8125rem
-              font-family: Ubuntu
               color: var(--black-2)
 
     .average

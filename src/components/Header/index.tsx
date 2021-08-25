@@ -28,11 +28,11 @@ export const Header = ({ isHome }: any) => {
       }
 
       { isHome && (
-        <nav className={styles.authContainer}>
-          <Link to='/login' className={`${styles.authButton} ${styles.login}`} onClick={handleLogin}>
+        <nav className={styles.auth}>
+          <Link to='/login' className={`${styles.buttons} ${styles.login}`} onClick={handleLogin}>
             Login
           </Link>
-          <Link to='/signup' className={`${styles.authButton} ${styles.register}`}>
+          <Link to='/signup' className={`${styles.buttons} ${styles.register}`}>
             Register
           </Link>
         </nav>

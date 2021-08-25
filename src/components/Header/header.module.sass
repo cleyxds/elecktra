@@ -1,39 +1,37 @@
 .headerContainer
   display: flex
-  padding: 2rem 3rem
-
   justify-content: center
   align-items: center
+  padding: 1.5rem 3rem
 
   img
     width: 56px
     height: 56px
 
-.authContainer
-  position: absolute
+.auth
+  display: flex
+  margin-right: 3rem
+  position: fixed
   right: 0
 
-  margin-right: 15rem
-
-.authButton
-  text-decoration: auto
+.buttons
   color: var(--black-1)
+  text-decoration: auto
   text-transform: uppercase
   margin-left: .625rem
-
-  font-weight: 400
-  font-family: Montserrat, sans-serif
-
-  background: transparent
-  padding: .5625rem .9375rem
-  display: inline-block
-  border: transparent
+  padding: .5625rem 1.1375rem
   box-shadow: 0 .125rem .25rem 0 rgba(0, 0, 0, .3)
-  border-radius: .25rem
+  border-radius: 1.3rem
+  font-family: Poppins
 
   &.register
     background: #1AAE9F
 
+    &:hover
+      background: #1AAE9FC7
+
   &.login
-    background: #3898ec
-    margin: 0
+    background: #3898EC
+
+    &:hover
+      background: #3898ECC7

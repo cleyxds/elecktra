@@ -61,23 +61,20 @@ export const Dashboard = () => {
 
                   <p>Aumento de +12%</p>
                 </div>
-                <select autoFocus name='options' defaultValue='Instant' className={styles.selector}>
-                  <option value='Instant'>Instanâneo</option>
-                </select>
               </div>
               <div className={styles.metrics}>
                 <div className={styles.smallFeature}>
                   <img src={BatteriesIcon} alt='Batteries Icon' />
                   <div>
-                    <span className={styles.feature}>Capacidade</span>
+                    <span className={styles.feature}>Voltagem</span>
                     <span><strong>220</strong> <small> V</small></span>
                   </div>
                 </div>
                 <div className={styles.smallFeature}>
                   <img src={EnergyIcon} alt='Energy Icon' />
                   <div>
-                    <span className={styles.feature}>Rendimento total</span>
-                    <span><strong>0</strong> <small> kWh</small></span>
+                    <span className={styles.feature}>Amperagem Máxima</span>
+                    <span><strong>30</strong> <small> A</small></span>
                   </div>
                 </div>
                 <div>

@@ -6,16 +6,17 @@ aside
   justify-content: center
 
   img
+    width: 3rem
+    height: 3rem
     position: relative
     top: -22%
-    width: 48px
-    height: 48px
-  
-.featureContainer
-  display: grid
-  grid-auto-rows: 6.25rem
 
-.feature
+  nav
+    background: var(--white-grey)
+    border-radius: 1rem
+
+.option
+  padding: .8rem
   display: flex
   justify-content: center
   align-items: center
@@ -23,8 +24,12 @@ aside
   color: var(--black-2)
   cursor: pointer
 
+  &:hover
+    background: var(--grey-1)
+    border-radius: 1rem
+
   h2
-    margin: 0
+    font-family: Poppins
 
   img
     width: 1.8125rem

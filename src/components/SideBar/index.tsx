@@ -16,18 +16,18 @@ export const SideBar = () => {
     <aside>
       <img src={Logo} alt='Logo' />
 
-      <nav className={styles.featureContainer}>
-        <div className={styles.feature}>
+      <nav>
+        {/* <div className={styles.option}>
           <img src={DashboardIcon} alt='Dashboard Icon' />
           <h2>Dashboard</h2>
-        </div>
-        <div className={styles.feature}>
+        </div> */}
+        <div className={styles.option}>
           <img src={BatteryIcon} alt='Battery Icon' />
-          <h2>Batteries</h2>
+          <h2>Baterias</h2>
         </div>
-        <div className={styles.feature} onClick={toggleSettingsModal}>
+        <div className={styles.option} onClick={toggleSettingsModal}>
           <img src={SettingsIcon} alt='Settings Icon' />
-          <h2>Settings</h2>
+          <h2>Configurações</h2>
         </div>
       </nav>
     </aside>

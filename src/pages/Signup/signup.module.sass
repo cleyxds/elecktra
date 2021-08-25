@@ -4,6 +4,7 @@
   align-items: center
 
   h1
+    font-family: Poppins
     margin-bottom: 5rem
 
 .formContainer
@@ -16,38 +17,43 @@
   form
     display: flex
     flex-direction: column
+    width: 20rem
 
     input
+      height: 2rem
       padding: 1.125rem 1rem 1.0625rem
-      background-color: #EDF1F5
-      color: #293845
       margin-bottom: 1.125rem
-
-      font-family: Montserrat, sans-serif
+      color: #293845
+      background-color: #EDF1F5
       font-size: 1.3125rem
       line-height: 1.5625rem
-      height: 32px
-      border-radius: .1875rem
       border: transparent
+      border-radius: .1875rem
     
     button
       padding: 1.125rem 1.25rem 1.0625rem 1.25rem
       color: #FFF
-      background-color: #31B6A8
-      cursor: pointer
+      background: #31B6A8
       text-align: center
       box-shadow: .125rem .125rem .25rem 0 rgba(0, 0, 0, 0.12)
-      border: transparent
       font-size: 1rem
       font-weight: 500
-      font-family: Montserrat, sans-serif
+      border: transparent
+      cursor: pointer
+
+      &:hover
+        background: #31B6A8C7
 
 .alternative
   padding: 4rem 0 2rem
+  font-family: Poppins
 
-  span
-    a
-      text-decoration: auto
-      color: #3898EC
-      border-bottom: 2px solid rgba(0, 0, 0, .5)
+  a
+    font-family: Poppins
+    text-decoration: auto
+    color: #3898EC
+    border-bottom: 2px solid rgba(0, 0, 0, .5)
+
+    &:hover
+      color: #3898ECC7
       
