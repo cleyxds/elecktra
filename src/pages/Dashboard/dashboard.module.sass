@@ -9,111 +9,12 @@
   width: 100%
   padding: 1.5625rem
 
-.measurementsContainer
+.content
   h1
     font-family: Poppins
     font-size: 2rem
     margin-bottom: 3rem
 
-  div
+  .measurements
     display: flex
     justify-content: space-around
-
-    .performance
-      display: flex
-      flex-direction: column
-      align-items: center
-      border-radius: .75rem
-
-      h2
-        margin-bottom: 1rem
-        font-family: Poppins
-        align-self: start
-
-      .measurements
-        padding: .75rem 1.5rem
-        justify-content: space-around
-        align-items: center
-        background: var(--blue-gradient)
-        border-radius: 1rem
-
-        h4
-          font-family: Poppins
-
-        strong
-          margin-block-start: 1rem
-          margin-block-end: 1.3rem
-          font-family: Roboto Mono
-          font-weight: 700
-          font-size: 2.25rem
-
-        p
-          font-weight: 700
-          font-size: 1rem
-          color: var(--red-1)
-
-        .graphics
-          height: 12rem
-          width: 12rem
-          margin-right: 2rem
-          border-radius: 50%
-          background: var(--graphic-gradient)
-          transition: transform 2s
-        
-        .statistics
-          flex-direction: column
-
-        .selector
-          padding: .5rem
-          font-family: Poppins
-          font-size: 1rem
-          border: transparent
-          border-radius: .9375rem
-          background: var(--white-grey)
-          position: relative
-          top: -5rem
-          right: -.8rem
-
-      .metrics
-        display: flex
-        justify-content: space-around
-        padding: 2rem 1.5rem .75rem
-
-        div // Each metric
-          font-family: Poppins
-          align-items: center
-
-          &.smallFeature::after
-            border-right: 1px solid var(--black-1)
-            position: relative
-            content: ""
-            height: 50%
-            width: 1.4375rem
-
-          img
-            width: 1.5rem
-            height: 1.5rem
-            margin: 0 .5rem
-            
-          div
-            display: flex
-            flex-direction: column
-            font-size: .875rem
-            justify-content: center
-
-            span
-              font-family: inherit
-
-              strong
-                font-family: inherit
-
-              small
-                font-family: inherit
-
-            .feature
-              font-family: inherit
-              font-size: .8125rem
-              color: var(--black-2)
-
-    .average
-      // background: var(--blue-gradient)

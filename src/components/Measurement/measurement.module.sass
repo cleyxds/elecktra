@@ -1,0 +1,84 @@
+.performanceContainer
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  h2
+    font-family: Poppins
+
+  .live
+    margin-top: 1rem
+    padding: .75rem 1.5rem
+    display: flex
+    justify-content: space-around
+    align-items: center
+    background: var(--blue-gradient)
+    border-radius: 1rem
+
+    .sun
+      height: 12rem
+      width: 12rem
+      margin-right: 2rem
+      border-radius: 50%
+      background: var(--graphic-gradient)
+      transition: transform 2s
+
+    .statistics
+      flex-direction: column
+
+      h4
+        font-family: Poppins
+
+      strong
+        margin-block-start: 1rem
+        margin-block-end: 1.3rem
+        font-family: Roboto Mono, monospace
+        font-weight: 700
+        font-size: 2.25rem
+
+      p
+        font-weight: 700
+        font-size: 1rem
+        color: var(--red-1)
+
+  .metrics
+    display: flex
+    justify-content: space-around
+    padding: 1rem 1.5rem .75rem
+
+    div // Each metric
+      display: flex
+      align-items: center
+      font-family: Poppins
+
+      img
+        width: 1.5rem
+        height: 1.5rem
+        padding: 0 .5rem
+
+      div
+        display: flex
+        flex-direction: column
+        font-size: .875rem
+        justify-content: center
+
+        span
+          font-family: inherit
+
+          strong
+            font-family: Roboto Mono, monospace
+
+          small
+            font-family: inherit
+
+      &.pipe::after
+        border-right: 1px solid var(--black-1)
+        position: relative
+        content: ""
+        height: 50%
+        width: 1.4375rem
+
+      &.label
+        font-family: inherit
+        font-size: .8125rem
+        color: var(--black-2)

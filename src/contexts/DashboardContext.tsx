@@ -9,8 +9,17 @@ interface DashboardContextData {
   toggleUploadModal: () => void
   isUploadModalOpen: boolean
   closeModals: () => void
-  socketSetup: () => Socket
+  SETUP_SOCKET: () => Socket
+  useSocket: () => Socket
   closeSocket: () => void
+  currentMeasurement: () => number
+  setCurrentMeasurement: (measurement: IMeasurement) => void
+}
+
+export interface IMeasurement {
+  customer: number
+  measurement: number
+  timestamp: string
 }
 
 interface DashboardContextProviderProps {
@@ -24,6 +33,7 @@ let socket: Socket
 export const DashboardContext = createContext({} as DashboardContextData)
 
 export const DashboardContextProvider = ({ children }: DashboardContextProviderProps) => {
+  const [measurement, setMeasurement] = useState({ measurement: 0 } as IMeasurement)
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false)
 
@@ -40,13 +50,21 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
     setIsSettingsModalOpen(!isSettingsModalOpen)
   }
 
-  const socketSetup = () => {
+  const SETUP_SOCKET = () => {
     return socket = io(SOCKET_IO_CONNECTION)
+  }
+
+  const useSocket = () => {
+    return socket
   }
 
   const closeSocket = () => {
     socket.close()
   }
+
+  const currentMeasurement = () => measurement.measurement
+
+  const setCurrentMeasurement = (measurement: IMeasurement) => setMeasurement(measurement)
 
   return (
     <DashboardContext.Provider
@@ -55,8 +73,11 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
         toggleUploadModal,
         isUploadModalOpen,
         closeModals,
-        socketSetup,
-        closeSocket
+        SETUP_SOCKET,
+        useSocket,
+        closeSocket,
+        currentMeasurement,
+        setCurrentMeasurement
       }}
     >
       {children}
