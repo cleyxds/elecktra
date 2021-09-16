@@ -9,8 +9,8 @@ interface DashboardContextData {
   toggleUploadModal: () => void
   isUploadModalOpen: boolean
   closeModals: () => void
-  SETUP_SOCKET: () => Socket
-  useSocket: () => Socket
+  startSocket: () => Socket
+  getSocket: () => Socket
   closeSocket: () => void
   currentMeasurement: () => number
   setCurrentMeasurement: (measurement: IMeasurement) => void
@@ -50,11 +50,11 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
     setIsSettingsModalOpen(!isSettingsModalOpen)
   }
 
-  const SETUP_SOCKET = () => {
+  const startSocket = () => {
     return socket = io(SOCKET_IO_CONNECTION)
   }
 
-  const useSocket = () => {
+  const getSocket = () => {
     return socket
   }
 
@@ -73,8 +73,8 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
         toggleUploadModal,
         isUploadModalOpen,
         closeModals,
-        SETUP_SOCKET,
-        useSocket,
+        startSocket,
+        getSocket,
         closeSocket,
         currentMeasurement,
         setCurrentMeasurement

@@ -14,16 +14,16 @@ import styles from './measurement.module.sass'
 export const Measurement = () => {
   const { customer } = useContext(AuthContext)
   const { 
-    SETUP_SOCKET,
-    useSocket,
+    startSocket,
+    getSocket,
     currentMeasurement,
     setCurrentMeasurement
   } = useContext(DashboardContext)
 
-  let socket = useSocket()
+  let socket = getSocket()
 
   useEffect(() => {
-    socket = SETUP_SOCKET()
+    socket = startSocket()
     socket.emit('customer', customer)
   }, [])
 

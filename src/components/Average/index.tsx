@@ -1,31 +1,35 @@
 import React, { useContext, useEffect } from 'react'
 
-import { Chart, ChartData, ChartDataset, ChartOptions } from 'chart.js'
-
 import { Line } from 'react-chartjs-2'
+
+import { Chart, ChartData, ChartOptions } from 'chart.js'
 
 import { StreamingPlugin, RealTimeScale } from 'chartjs-plugin-streaming'
 import 'chartjs-adapter-date-fns'
 
-import { DashboardContext } from '../../contexts/DashboardContext'
+import { io, Socket } from 'socket.io-client'
+
+import { IMeasurement } from '../../contexts/DashboardContext'
 
 import styles from './average.module.sass'
 
-export const Average = () => {
-  // const { currentMeasurement } = useContext(DashboardContext)
+const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
+export const Average = () => {
   console.log('Render fora')
 
   Chart.register(StreamingPlugin)
   Chart.registry.addScales(RealTimeScale)
 
+  let socket: Socket
+
   const data: ChartData = {
     datasets: [{
       label: 'Watts',
       data: [],
-      backgroundColor: '#7733CC',
-      borderColor: '#BB99E6',
-      borderWidth: 1
+      backgroundColor: '#E2521E',
+      borderColor: '#DF9D62',
+      borderWidth: 1.5
     }]
   }
 
@@ -35,23 +39,36 @@ export const Average = () => {
     },
     scales: {
       x: {
-        type: 'realtime',
-        realtime: {
-          onRefresh: (chart: Chart) => {
-            chart.data.datasets.forEach((dataset: ChartDataset) => {
-              dataset.data.push({
-                x: Date.now(),
-                y: Math.floor(Math.random() * 1000)
-              })
-            })
-          },
-        }
+        type: 'realtime'
       },
       y: {
         beginAtZero: true
       }
     }
   }
+
+  const updateChart = (chart: Chart) => {
+    socket.on('measurement', message => {
+      const measurementMessage = message as IMeasurement
+
+      chart.data.datasets[0].data.push({
+        x: Date.now(),
+        y: measurementMessage.measurement
+      })
+
+      chart.update('quiet')
+    })
+  }
+
+  useEffect(() => {
+    socket = io(SOCKET_IO_CONNECTION)
+  }, [])
+
+
+  useEffect(() => {
+    const chart = Chart.instances[0]
+    updateChart(chart)
+  }, [])
 
   return (
     <section className={styles.averageContainer}>
