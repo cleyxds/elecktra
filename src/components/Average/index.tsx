@@ -1,54 +1,69 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 
-import {
-  Line,
-  LineChart,
-  XAxis,
-  YAxis
-} from 'recharts'
+import { Chart, ChartData, ChartDataset, ChartOptions } from 'chart.js'
 
-import { format } from 'date-fns'
+import { Line } from 'react-chartjs-2'
+
+import { StreamingPlugin, RealTimeScale } from 'chartjs-plugin-streaming'
+import 'chartjs-adapter-date-fns'
 
 import { DashboardContext } from '../../contexts/DashboardContext'
 
 import styles from './average.module.sass'
 
-interface IChartData {
-  timestamp: string
-  watts: number
-}
-
 export const Average = () => {
-  const [data, setData] = useState([] as IChartData[])
-  const { currentMeasurement } = useContext(DashboardContext)
+  // const { currentMeasurement } = useContext(DashboardContext)
 
-  useEffect(() => {
-    data.length === 120 && data.splice(0, data.length)
+  console.log('Render fora')
 
-    const chartData = [
-      {
-        timestamp: format(new Date(), "hh:mm:ss a"),
-        watts: currentMeasurement()
+  Chart.register(StreamingPlugin)
+  Chart.registry.addScales(RealTimeScale)
+
+  const data: ChartData = {
+    datasets: [{
+      label: 'Watts',
+      data: [],
+      backgroundColor: '#7733CC',
+      borderColor: '#BB99E6',
+      borderWidth: 1
+    }]
+  }
+
+  const options: ChartOptions = {
+    interaction: {
+      intersect: false
+    },
+    scales: {
+      x: {
+        type: 'realtime',
+        realtime: {
+          onRefresh: (chart: Chart) => {
+            chart.data.datasets.forEach((dataset: ChartDataset) => {
+              dataset.data.push({
+                x: Date.now(),
+                y: Math.floor(Math.random() * 1000)
+              })
+            })
+          },
+        }
+      },
+      y: {
+        beginAtZero: true
       }
-    ]
-
-    setData([...data, chartData[0]])
-  },[currentMeasurement])
-  
+    }
+  }
 
   return (
     <section className={styles.averageContainer}>
       <h2>Média</h2>
       <div className={styles.live}>
-        <LineChart 
-          width={400} 
-          height={200} 
+        <Line
+          width={400}
+          height={250}
           data={data}
-        >
-          <XAxis dataKey='timestamp' />
-          <YAxis />
-          <Line dataKey='watts' stroke='#8884D8FF' />
-        </LineChart>
+          options={options}
+          plugins={[StreamingPlugin]}
+        />
       </div>
     </section>
   )
