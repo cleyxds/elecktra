@@ -5,6 +5,8 @@ import { DashboardContext } from '../../contexts/DashboardContext'
 
 import CloseIcon from '../../assets/Dashboard/close.svg'
 
+import { format, parseISO } from 'date-fns'
+
 import styles from './settings.module.sass'
 
 export const SettingsModal = () => {
@@ -19,8 +21,8 @@ export const SettingsModal = () => {
         <div>
           <span>Usuário: {customer.login}</span>
           <span>ID: {customer.id}</span>
-          <span>Dispositivos: {customer.devices}</span>
-          <span>Criado em {customer.created_at}</span>
+          <span>Dispositivos: {customer.devices.length}</span>
+          <span>Criado em {format(parseISO(customer.created_at), 'dd/MM/yyyy @ h:mm aa')}</span>
         </div>
 
         <button type='button' onClick={toggleSettingsModal}>

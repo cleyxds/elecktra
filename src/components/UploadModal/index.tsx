@@ -19,7 +19,7 @@ export const UploadModal = () => {
     const file: File = image.file[0]
     formData.append('file', file)
 
-    const { data } = await customers.post('/images', formData, {
+    const { data } = await customers.post('/api/images', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'id': customer.id

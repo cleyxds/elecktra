@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   }
 
   const handleLogin = async (login: ILoginForm) => {
-    const { data } = await customers.post('/customers/token', login)
+    const { data } = await customers.post('/api/customers/token', login)
     setCustomer(data.customer)
     setJWT(data.jwt)
     await handleAuth(data.jwt)
@@ -60,7 +60,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   }
   
   const handleRegister = async (register: IRegisterForm) => {
-    await customers.post('/customers', register)
+    await customers.post('/api/customers', register)
     await handleLogin({ 
       email: register.email, 
       password: register.password 
@@ -94,7 +94,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   }
 
   const revalidateCustomer = async (jwt: string) => {
-    const { data } = await customers.get('/customers/token', {
+    const { data } = await customers.get('/api/customers/token', {
       headers: {
         'jwt': jwt
       }

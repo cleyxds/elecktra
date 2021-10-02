@@ -2,7 +2,7 @@ export interface ICustomer {
   id: number
   name: string
   login: string
-  devices: number
+  devices: string[]
   avatar_url: string
   created_at: string
 }

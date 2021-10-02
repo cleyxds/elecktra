@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-
-import { Socket } from 'socket.io-client'
+import React, { useContext, useEffect } from 'react'
 
 import { AuthContext } from '../../contexts/AuthContext'
 import { DashboardContext, IMeasurement } from '../../contexts/DashboardContext'

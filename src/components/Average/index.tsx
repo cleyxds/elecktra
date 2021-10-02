@@ -16,8 +16,6 @@ import styles from './average.module.sass'
 const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
 export const Average = () => {
-  console.log('Render fora')
-
   Chart.register(StreamingPlugin)
   Chart.registry.addScales(RealTimeScale)
 
