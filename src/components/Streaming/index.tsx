@@ -9,17 +9,43 @@ import 'chartjs-adapter-date-fns'
 
 import { io, Socket } from 'socket.io-client'
 
+import { AuthContext } from '../../contexts/AuthContext'
 import { IMeasurement } from '../../contexts/DashboardContext'
 
-import styles from './average.module.sass'
+import styles from './streaming.module.sass'
 
 const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
-export const Average = () => {
+export const Streaming = () => {
+  const { customer } = useContext(AuthContext)
+
+  let socket: Socket
+
   Chart.register(StreamingPlugin)
   Chart.registry.addScales(RealTimeScale)
 
-  let socket: Socket
+  useEffect(() => {
+    socket = io(SOCKET_IO_CONNECTION)
+    socket.emit('customer', customer)
+  }, [])
+
+  const updateChart = (chart: Chart) => {
+    socket.on('measurement', (data: IMeasurement) => {
+
+      data.customer_id === customer.id &&
+        chart.data.datasets[0].data.push({
+          x: Date.now(),
+          y: data.measurement
+        })
+
+      chart.update('quiet')
+    })
+  }
+
+  useEffect(() => {
+    const chart = Chart.instances[0]
+    updateChart(chart)
+  }, [])
 
   const data: ChartData = {
     datasets: [{
@@ -45,31 +71,8 @@ export const Average = () => {
     }
   }
 
-  const updateChart = (chart: Chart) => {
-    socket.on('measurement', message => {
-      const measurementMessage = message as IMeasurement
-
-      chart.data.datasets[0].data.push({
-        x: Date.now(),
-        y: measurementMessage.measurement
-      })
-
-      chart.update('quiet')
-    })
-  }
-
-  useEffect(() => {
-    socket = io(SOCKET_IO_CONNECTION)
-  }, [])
-
-
-  useEffect(() => {
-    const chart = Chart.instances[0]
-    updateChart(chart)
-  }, [])
-
   return (
-    <section className={styles.averageContainer}>
+    <section className={styles.streamingContainer}>
       <h2>Média</h2>
       <div className={styles.live}>
         <Line

@@ -1,7 +1,5 @@
 import React, { createContext, ReactNode, useState } from 'react'
 
-import { io, Socket } from 'socket.io-client'
-
 import { SettingsModal } from '../components/SettingsModal'
 
 interface DashboardContextData {
@@ -9,15 +7,13 @@ interface DashboardContextData {
   toggleUploadModal: () => void
   isUploadModalOpen: boolean
   closeModals: () => void
-  startSocket: () => Socket
-  getSocket: () => Socket
-  closeSocket: () => void
-  currentMeasurement: () => number
-  setCurrentMeasurement: (measurement: IMeasurement) => void
+  lastMeasurement: number
+  setLastMeasurement: (measurement: IMeasurement) => void
 }
 
 export interface IMeasurement {
-  customer: number
+  device_id: string
+  customer_id: number
   measurement: number
   timestamp: string
 }
@@ -26,10 +22,6 @@ interface DashboardContextProviderProps {
   children: ReactNode
 }
 
-const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
-
-let socket: Socket
-
 export const DashboardContext = createContext({} as DashboardContextData)
 
 export const DashboardContextProvider = ({ children }: DashboardContextProviderProps) => {
@@ -37,9 +29,12 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false)
 
+  const lastMeasurement: number = measurement.measurement
+
   const closeModals = () => {
     setIsSettingsModalOpen(false)
     setIsUploadModalOpen(false)
+    setMeasurement({} as IMeasurement)
   }
 
   const toggleUploadModal = () => {
@@ -50,21 +45,7 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
     setIsSettingsModalOpen(!isSettingsModalOpen)
   }
 
-  const startSocket = () => {
-    return socket = io(SOCKET_IO_CONNECTION)
-  }
-
-  const getSocket = () => {
-    return socket
-  }
-
-  const closeSocket = () => {
-    socket.close()
-  }
-
-  const currentMeasurement = () => measurement.measurement
-
-  const setCurrentMeasurement = (measurement: IMeasurement) => setMeasurement(measurement)
+  const setLastMeasurement = (measurement: IMeasurement) => setMeasurement(measurement)
 
   return (
     <DashboardContext.Provider
@@ -73,11 +54,8 @@ export const DashboardContextProvider = ({ children }: DashboardContextProviderP
         toggleUploadModal,
         isUploadModalOpen,
         closeModals,
-        startSocket,
-        getSocket,
-        closeSocket,
-        currentMeasurement,
-        setCurrentMeasurement
+        lastMeasurement,
+        setLastMeasurement
       }}
     >
       {children}

@@ -13,6 +13,8 @@ export const SettingsModal = () => {
   const { customer } = useContext(AuthContext)
   const { toggleSettingsModal } = useContext(DashboardContext)
 
+  const formattedDate = format(parseISO(customer.created_at), 'dd/MM/yyyy @ h:mm aa')
+
   return (
     <div className={styles.overlay}>
       <section className={styles.settingsContainer}>
@@ -22,7 +24,7 @@ export const SettingsModal = () => {
           <span>Usuário: {customer.login}</span>
           <span>ID: {customer.id}</span>
           <span>Dispositivos: {customer.devices.length}</span>
-          <span>Criado em {format(parseISO(customer.created_at), 'dd/MM/yyyy @ h:mm aa')}</span>
+          <span>Criado em {formattedDate}</span>
         </div>
 
         <button type='button' onClick={toggleSettingsModal}>

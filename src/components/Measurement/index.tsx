@@ -7,29 +7,31 @@ import BatteriesIcon from '../../assets/Dashboard/battery.svg'
 import EnergyIcon from '../../assets/Dashboard/energy.svg'
 import GlobeIcon from '../../assets/Dashboard/globe.svg'
 
+import { io, Socket } from 'socket.io-client'
+
 import styles from './measurement.module.sass'
+
+const SOCKET_IO_CONNECTION: string = process.env.REACT_APP_SOCKETIO_SERVER as string
 
 export const Measurement = () => {
   const { customer } = useContext(AuthContext)
-  const { 
-    startSocket,
-    getSocket,
-    currentMeasurement,
-    setCurrentMeasurement
-  } = useContext(DashboardContext)
+  const { lastMeasurement, setLastMeasurement } = useContext(DashboardContext)
 
-  let socket = getSocket()
+  let socket: Socket
 
   useEffect(() => {
-    socket = startSocket()
+    socket = io(SOCKET_IO_CONNECTION)
     socket.emit('customer', customer)
   }, [])
 
   useEffect(() => {
-    socket.on('measurement', message => {
-      const measurementMessage = message as IMeasurement
+    socket.emit('customer', customer)
+  }, [])
 
-      measurementMessage.customer === customer.id && setCurrentMeasurement(measurementMessage)
+  useEffect(() => {
+    socket.on('measurement', (data: IMeasurement) => {
+      data.customer_id === customer.id &&
+      setLastMeasurement(data)
     })
   }, [])
 
@@ -37,15 +39,15 @@ export const Measurement = () => {
     <section className={styles.performanceContainer}>
       <h2>Performance</h2>
       <div className={styles.live}>
-        <div 
-          className={styles.sun} 
-          style={{ transform: `scale(${(currentMeasurement() / 5500) * 2})` }} 
+        <div
+          className={styles.sun}
+          style={{ transform: `scale(${(lastMeasurement / 5500) * 2})` }}
         />
 
         <div className={styles.statistics}>
           <h4>Consumo instanâneo</h4>
 
-          <strong>{currentMeasurement()} <sup>W</sup></strong>
+          <strong>{lastMeasurement} <sup>W</sup></strong>
 
           <p>Aumento de +12%</p>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
 import { AuthContext } from '../../contexts/AuthContext'
 import { DashboardContext } from '../../contexts/DashboardContext'
@@ -13,18 +13,12 @@ import styles from './profile.module.sass'
 
 export const Profile = () => {
   const { customer, handleLogout } = useContext(AuthContext)
-  const 
-  { closeSocket, 
-    toggleUploadModal, 
-    isUploadModalOpen, 
-    closeModals 
-  } = useContext(DashboardContext)
+  const { toggleUploadModal, isUploadModalOpen, closeModals } = useContext(DashboardContext)
 
   const history = useHistory()
 
   const confirmLogout = () => {
     closeModals()
-    closeSocket()
     handleLogout()
     setTimeout(() => history.push('/'), 1000)
   }
