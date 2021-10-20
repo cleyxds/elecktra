@@ -18,6 +18,7 @@ interface AuthContextData {
   handleLogin: (login: ILoginForm) => Promise<void>
   handleLogout: () => void
   handleRegister: (register: IRegisterForm) => Promise<void>
+  updateCustomer: (customer: ICustomer) => void
   updateAvatarUrl: (avatar_url: string) => void
 }
 
@@ -33,6 +34,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const { decodedToken, isExpired } = useJwt(JWT)
+
+  const updateCustomer = (customer: ICustomer) => {
+    setCustomer(customer)
+  }
 
   const updateAvatarUrl = (avatar_url: string) => {
     setCustomer({
@@ -115,6 +120,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         handleLogin,
         handleLogout,
         handleRegister,
+        updateCustomer,
         updateAvatarUrl
       }}
     >
